@@ -2,6 +2,7 @@ package overflowdb;
 
 import overflowdb.util.IteratorUtils;
 
+import java.io.Serializable;
 import java.util.*;
 
 public class BatchedUpdate {
@@ -20,7 +21,7 @@ public class BatchedUpdate {
         public long next();
     }
 
-    public interface DiffOrBuilder {
+    public interface DiffOrBuilder extends Serializable{
         public int size();
 
         Iterator<Change> iterator();
@@ -44,7 +45,7 @@ public class BatchedUpdate {
 
 
     //Interface Change
-    public interface Change {
+    public interface Change extends Serializable {
     }
 
     public static class DiffGraph implements DiffOrBuilder {
