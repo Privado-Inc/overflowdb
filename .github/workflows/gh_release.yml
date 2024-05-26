@@ -1,0 +1,27 @@
+name: Release
+on:
+  push:
+    tags: ["*"]
+  workflow_dispatch:
+jobs:
+  release:
+    concurrency: release
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 19
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.sbt
+            ~/.coursier
+          key: ${{ runner.os }}-sbt-${{ hashfiles('**/build.sbt') }}
+      - run: sbt +test ciReleaseTagNextVersion ++3.4.1 publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
