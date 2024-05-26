@@ -2,7 +2,7 @@
 
 set -e
 
-git remote set upstream https://github.com/ShiftLeftSecurity/overflowdb
+git remote add upstream https://github.com/ShiftLeftSecurity/overflowdb
 
 usage() {
   echo "Usage: $0 [--publish]"
