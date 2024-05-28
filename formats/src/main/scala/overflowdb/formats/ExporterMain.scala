@@ -21,7 +21,6 @@ object ExporterMain {
   lazy val logger = LoggerFactory.getLogger(getClass)
 
   def apply(nodeFactories: Seq[NodeFactory[_]], edgeFactories: Seq[EdgeFactory[_]]): Array[String] => Unit = { args =>
-    println("overflowdb custom")
     OParser
       .parse(parser, args, Config(Paths.get("/dev/null"), null, Paths.get("/dev/null")))
       .map { case Config(inputFile, format, outputFile) =>
